@@ -1,61 +1,32 @@
-<script lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import NavItem from './NavItem.vue'
-// import { useCounterStore } from '@/stores/counter'
+<script setup lang="ts">
+import { useAppDataStore } from '@/stores/appData'
+import { RouterView } from 'vue-router'
 import TheLogo from '@/components/TheLogo.vue'
-// const counter = useCounterStore()
-// defineProps<{
-//   msg: string
-// }>()
+import NavItem from './NavItem.vue'
 
-export default {
-  components: {
-    TheLogo,
-    NavItem,
-  },
-  data() {
-    return {
-      menuItems: [
-        { name: 'Home', link: '/' },
-        { name: 'Projects', link: '/projects' },
-        { name: 'Resume', link: '/resume' },
-        { name: 'Contact', link: '/contact' },
-      ],
-    }
-  },
-}
+const store = useAppDataStore()
 </script>
 
 <template>
-  <header class="w-full text-sm">
-    <div class="fixed top-0 left-0 h-16 w-full bg-gray-50">
-      <div
-        id="test"
-        class="mx-auto flex h-full flex-nowrap border-b border-solid border-gray-500 px-8 shadow-lg"
-      >
-        <TheLogo />
-        <nav class="ml-12 h-16 items-center">
-          <ul class="flex h-full items-center space-x-10 lg:flex">
-            <li
-              v-for="menuItem in menuItems"
-              :key="menuItem.name"
-              :name="menuItem.name"
-              :link="menuItem.link"
-            >
-              <RouterLink
-                aria-label="Home"
-                title="Home"
-                class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                :to="`${menuItem.link}`"
-                >{{ menuItem.name }}</RouterLink
-              >
-              <NavItem />
-            </li>
-          </ul>
-          <RouterView />
-        </nav>
-        <TheButton />
-      </div>
+  <div
+    class="fixed h-16 w-full border-b border-solid border-gray-500 bg-gray-50 px-8 shadow-lg"
+  >
+    <div class="mx-auto flex h-full flex-nowrap">
+      <TheLogo />
+      <nav class="ml-12 h-16 items-center text-sm">
+        <ul class="flex h-full items-center space-x-10 lg:flex">
+          <NavItem
+            class="flex h-full items-center space-x-10 lg:flex"
+            v-for="menuItem in store.menuItems"
+            :key="menuItem.name"
+            :name="menuItem.name"
+            :link="menuItem.link"
+          >
+          </NavItem>
+        </ul>
+        <RouterView />
+      </nav>
+      <TheButton />
     </div>
-  </header>
+  </div>
 </template>

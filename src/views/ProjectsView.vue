@@ -1,5 +1,9 @@
+<script setup lang="ts">
+import ProjectHeader from '@/components/ProjectHeader.vue'
+</script>
+
 <template>
-  <div class="mt-12">
-    <h1>This is an projects page</h1>
-  </div>
+  <teleport to="main">
+    <ProjectHeader />
+  </teleport>
 </template>

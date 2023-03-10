@@ -1,109 +1,40 @@
+<script setup lang="ts">
+import { useAppDataStore } from '@/stores/appData'
+import { useUserDataStore } from '@/stores/userData'
+import { onBeforeUnmount } from 'vue'
+import TheButton from './UI/TheButton.vue'
+import BaseCard from '@/components/UI/BaseCard.vue'
+import BaseBage from './UI/BaseBage.vue'
+import CardContentText from './UI/CardContentText.vue'
+import CardContentStack from '@/components/UI/CardContentStack.vue'
+import CardContentVideo from './UI/CardContentVideo.vue'
+const appStore = useAppDataStore()
+const userStore = useUserDataStore()
+appStore.changeAction()
+onBeforeUnmount(() => clearInterval(appStore.interval))
+</script>
 <template>
-  <div class="items-center flex h-full w-full justify-between py-8">
-    <div class="mb-10 lg:mb-0 lg:max-w-lg lg:pr-5">
-      <div class="mb-6 max-w-xl">
-        <div>
-          <p
-            class="mb-4 inline-block rounded-full bg-teal-accent-400 px-3 py-px text-xs font-semibold uppercase tracking-wider text-teal-900"
-          >
-            Open to work
-          </p>
+  <section id="hero" class="just flex w-auto flex-wrap justify-center p-4">
+    <BaseCard>
+      <div id="el1" class="m-4 h-96 w-128 p-1">
+        <BaseBage>
+          {{ userStore.me.status }}
+        </BaseBage>
+        <CardContentText>
+          {{ appStore.action }}
+          <template v-slot:plus> {{ userStore.me.description }}</template>
+        </CardContentText>
+        <CardContentStack :image="`${userStore.me.stack[0].stackImg}`">
+          {{ userStore.me.stackTitle }}
+          <template v-slot:stackItem>
+            {{ userStore.me.stack[0].stackKey }}</template
+          ></CardContentStack
+        >
+        <div id="card-button" class="m-2 h-12 w-96 p-2">
+          <TheButton />
         </div>
-        <h2
-          class="mb-6 max-w-lg font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none"
-        >
-          The quick, brown fox<br class="hidden md:block" />
-          jumps over
-          <span class="inline-block text-deep-purple-accent-400"
-            >a lazy dog</span
-          >
-        </h2>
-        <p class="text-base text-gray-700 md:text-lg">
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.
-          explicabo.
-        </p>
       </div>
-      <div class="items-center flex flex-col md:flex-row">
-        <a
-          href="/"
-          class="items-center mb-3 inline-flex h-12 w-full justify-center rounded bg-deep-purple-accent-400 px-6 font-medium tracking-wide text-white shadow-md transition duration-200 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none md:mr-4 md:mb-0 md:w-auto"
-        >
-          <span class="mr-3">Start Shopping</span>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            class="w-4"
-          >
-            <polyline
-              fill="none"
-              stroke="currentColor"
-              stroke-miterlimit="10"
-              points="4,4 22,4 19,14 4,14 "
-            ></polyline>
-            <circle
-              cx="4"
-              cy="22"
-              r="2"
-              stroke-linejoin="miter"
-              stroke-linecap="square"
-              stroke="none"
-              fill="currentColor"
-            ></circle>
-            <circle
-              cx="20"
-              cy="22"
-              r="2"
-              stroke-linejoin="miter"
-              stroke-linecap="square"
-              stroke="none"
-              fill="currentColor"
-            ></circle>
-            <polyline
-              fill="none"
-              stroke="currentColor"
-              stroke-miterlimit="10"
-              points="1,1 4,4 4,14 2,18 23,18 "
-            ></polyline>
-          </svg>
-        </a>
-        <a
-          href="/"
-          aria-label=""
-          class="items-center inline-flex font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700"
-          >Get 15% discount</a
-        >
-      </div>
-    </div>
-    <div class="relative lg:w-1/2">
-      <img
-        class="h-56 w-full rounded object-cover shadow-lg sm:h-96"
-        src="https://images.pexels.com/photos/927022/pexels-photo-927022.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1260"
-        alt=""
-      />
-      <a
-        href="/"
-        aria-label="Play Video"
-        class="items-center group absolute inset-0 flex h-full w-full justify-center bg-gray-900 bg-opacity-50 transition-colors duration-300 hover:bg-opacity-25"
-      >
-        <div
-          class="items-center flex h-16 w-16 transform justify-center rounded-full bg-gray-100 shadow-2xl transition duration-300 group-hover:scale-110"
-        >
-          <svg
-            class="w-10 text-gray-900"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M16.53,11.152l-8-5C8.221,5.958,7.833,5.949,7.515,6.125C7.197,6.302,7,6.636,7,7v10 c0,0.364,0.197,0.698,0.515,0.875C7.667,17.958,7.833,18,8,18c0.184,0,0.368-0.051,0.53-0.152l8-5C16.822,12.665,17,12.345,17,12 S16.822,11.335,16.53,11.152z"
-            ></path>
-          </svg>
-        </div>
-      </a>
-    </div>
-  </div>
+      <CardContentVideo />
+    </BaseCard>
+  </section>
 </template>

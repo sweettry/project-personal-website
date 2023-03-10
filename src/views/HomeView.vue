@@ -3,7 +3,7 @@ import HomeHeader from '@/components/HomeHeader.vue'
 </script>
 
 <template>
-  <main class="">
+  <teleport to="main">
     <HomeHeader />
-  </main>
+  </teleport>
 </template>

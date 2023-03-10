@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require('tailwindcss/defaultTheme')
-
+// const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
@@ -308,9 +308,13 @@ module.exports = {
         28: '7rem',
         80: '20rem',
         96: '24rem',
+        128: '32rem',
+        176: '44rem',
       },
       height: {
         '1/2': '50%',
+        // eslint-disable-next-line prettier/prettier
+        '128': '32rem',
       },
       scale: {
         30: '.3',

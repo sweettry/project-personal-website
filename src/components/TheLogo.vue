@@ -4,7 +4,7 @@
     aria-label="Home"
     title="Home"
     class="flex h-full items-center text-xl"
-    to="/"
+    to="/resume"
     >Dmitry Sevryukov</RouterLink
   >
 </template>
